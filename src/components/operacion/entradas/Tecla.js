@@ -6,7 +6,8 @@ const Tecla = props => (
   <Button
     onClick={() => props.agregarValor(props.valor)}
     size="lg"
-    color={props.color || 'primary'}
+    color="primary"
+    className="botonAzul"
     style={{ width: '100%', height: '5rem', fontSize: 40 }}
   >
     {props.valor}

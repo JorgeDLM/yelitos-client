@@ -1,6 +1,7 @@
 import React from 'react';
 import { Container, Row, Col, Card, Button, Input, CardBody } from 'reactstrap';
 import Tecla from './Tecla';
+import { FaBackspace } from 'react-icons/fa';
 
 export default props => (
   <Card>
@@ -8,29 +9,13 @@ export default props => (
       <Container>
         <Row>
           <Col>
-            <Input value={props.cantidad} bsSize="lg" readOnly />
-          </Col>
-        </Row>
-        <Row className="mt-2">
-          <Col>
-            <Button
-              onClick={props.cantidadBorrar}
-              style={{ width: '100%' }}
-              size="lg"
-              color="warning"
-            >
-              Borrar
-            </Button>
-          </Col>
-          <Col>
-            <Button
-              onClick={props.cantidadVaciar}
-              style={{ width: '100%' }}
-              size="lg"
-              color="danger"
-            >
-              Vaciar
-            </Button>
+            <Input
+              value={props.cantidad}
+              bsSize="lg"
+              placeholder="Número de bolsas"
+              className="tamanoInputCalculadora tenorme"
+              readOnly
+            />
           </Col>
         </Row>
         <Row className="mt-2">
@@ -87,12 +72,43 @@ export default props => (
         <Row className="mt-2">
           <Col>
             <Button
+              onClick={props.cantidadBorrar}
+              style={{ width: '100%', fontSize: 40 }}
+              size="lg"
+              className="botonBlanco1"
+            >
+              <FaBackspace color="" />
+            </Button>
+          </Col>
+          <Col>
+            <Tecla agregarValor={props.cantidadModificar} valor={0} />
+          </Col>
+          <Col>
+            <Button
+              onClick={props.cantidadVaciar}
+              style={{ width: '100%', fontSize: 40 }}
+              size="lg"
+              className="botonRojo"
+            >
+              Borrar
+            </Button>
+          </Col>
+        </Row>
+        <Row className="mt-2">
+          <Col>
+            <Button
               onClick={props.cambiarComponente}
               style={{ width: '100%' }}
               size="lg"
               color="success"
+              className="tenorme tamanoInputCalculadora"
+              disabled={
+                props.cantidad === '' ||
+                parseInt(props.cantidad) * 1 === 0 ||
+                isNaN(parseInt(props.cantidad) * 1)
+              }
             >
-              Seleccionar presentacion
+              Continuar >>
             </Button>
           </Col>
         </Row>

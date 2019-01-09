@@ -1,15 +1,18 @@
 import React from 'react';
 import Cantidad from './entradas/Cantidad';
 import Presentaciones from './entradas/Presentaciones';
-import _ from 'lodash/array';
+import Nombres from './entradas/Nombres';
+import uniqBy from 'lodash/uniqBy';
+import axios from 'axios';
+import swal from '@sweetalert/with-react';
+import { axiosConfig } from '../../constants';
+import { TopLogo } from '../layouts';
 // TODO: borrar mock data
 import productos from './productos.mock.json';
 
 class Operacion extends React.PureComponent {
   state = {
-    cantidad: 0,
     presentacion: null,
-    nombre: null,
     cadena_cantidad: '',
     vista: 1
   };
@@ -20,7 +23,63 @@ class Operacion extends React.PureComponent {
     }));
   }
 
-  render() {
+  handleCambioPresentacion(valor) {
+    this.setState({ presentacion: valor, vista: 3 });
+  }
+
+  submit(valor) {
+    const { id, presentacion } = valor;
+    let cantidad = parseInt(this.state.cadena_cantidad);
+    if (!isNaN(cantidad)) {
+      swal({
+        title: 'Verifique su informacion',
+        text: `Registar ${cantidad} bolsas en presentación de ${presentacion} de bolsa ${
+          valor.nombre
+        }`,
+        icon: 'info',
+        buttons: {
+          confirm: {
+            text: 'Continuar',
+            value: true
+          },
+          cancel: {
+            text: 'Cancelar',
+            value: false,
+            visible: true
+          }
+        }
+      }).then(confirmacion => {
+        console.log(confirmacion);
+        if (confirmacion) {
+          axios(
+            axiosConfig('/entradas', 'post', {
+              productoId: id,
+              cantidad,
+              presentacion
+            })
+          )
+            .then(response => {
+              if (response.status === 200) {
+                swal(
+                  'Exito',
+                  'La produccion ha sido regitrada',
+                  'success'
+                ).then(() => {
+                  this.setState({
+                    presentacion: null,
+                    cadena_cantidad: '',
+                    vista: 1
+                  });
+                });
+              }
+            })
+            .catch(console.log);
+        }
+      });
+    }
+  }
+
+  vistaActual() {
     switch (this.state.vista) {
       case 1:
         return (
@@ -44,13 +103,23 @@ class Operacion extends React.PureComponent {
           />
         );
       case 2:
-        return <h1>Hello</h1>;
-      case 3:
-        break;
+        return (
+          <Presentaciones
+            presentaciones={productos}
+            presentacionModificar={this.submit.bind(this)}
+            presentacionVolver={() => {
+              this.setState({ vista: 1 });
+            }}
+          />
+        );
       default:
         this.setState({ vista: 1 });
         break;
     }
+  }
+
+  render() {
+    return <TopLogo>{this.vistaActual()}</TopLogo>;
   }
 }
 

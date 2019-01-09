@@ -1,14 +1,14 @@
 import React, { Component } from 'react';
 import { BrowserRouter, Switch, Route } from 'react-router-dom';
-import { Operacion } from './components';
-import 'bootstrap/dist/css/bootstrap.min.css';
+import { Operacion, Admin } from './components';
 
 class App extends Component {
   render() {
     return (
       <BrowserRouter>
         <Switch>
-          <Route path="/operacion" component={Operacion} />
+          <Route exact path="/operacion" component={Operacion} />
+          <Route path="/admin" component={Admin} />
         </Switch>
       </BrowserRouter>
     );
