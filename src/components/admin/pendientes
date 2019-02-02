@@ -1,0 +1,72 @@
+pendientes....
+
+limitar valor total de insumos float a 2 decimales, tambien en productos (cuando este)
+
+
+cada que se escoja una fecha o un rango, que diga la produccion total por producto (solo una vez, total del rango seleccionado)
+
+boton de editar producto
+
+que cuando añadas un nuevo insumo, no se ingrese la cantidad (que solo se ingrese nombre del producto el precio por unidad y el inventario minimo, ya si quiere agregar inventario sobre el insumo que lo añada manualmente. que se recargue este campo cada vez que se añada un producto nuevo)
+
+resultados mensuales (poner siempre visibles los resultados mensuales en INICIO)
+
+grafica con rango, poner velas tipo mensuales o semanales despues de un mes
+
+calendario en español, grafica con fecha en español
+
+
+respalod (base de datos)
+
+
+boton retirar insumo
+limpiar forma<s
+
+poner practibolsa
+
+FASE 2:
+
+inventarios de produccion (saber cuantas bolsas de cuantos kg tiene que haber en almacen)
+
+ingresar ventas del dia (adeudos de clientes? contabilidad?)
+
+registro de compras (de insumos) poder ver historiales (precio de compra por unidad, compra total por dia, etc...)
+
+valor del producto con respecto a los insumos que usa, (costo)
+
+soft soft delete (para que se oculten los productos eliminados)
+
+historial de uso de insumos, precios historicos de insumos, valor historico de producto (cuanto costaba en el tiempo)
+
+ventas (precios de venta), alimentar ventas
+
+
+FASE 3:
+
+switches: controlar que maquinas estan prendidas desde el sistema
+
+medidores (controlar la produccion)
+
+poder ver las camaras desde la pagina en tiempo real
+
+poder ver camionetas en un mapa en tiempo real
+
+recibir alertas via sms cada vez que una maquina se apague
+
+
+
+FASE 4:
+
+automatizacion
+
+
+
+montarla en heroku
+
+
+JN6PD25S27X504783
+xb 72 806
+
+
+en pestaña admin/insumos
+	-poner cantidad minima de cada insumo para que mande alertas una vez llegue al nivel minimo... o que se ponga de fondo color rojo con un *se necesita mas de este insumo debajo...a

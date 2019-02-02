@@ -3,7 +3,7 @@ import { Container, Row, Col } from 'reactstrap';
 import logo from '../../imgs/Logo.jpg';
 
 export default props => (
-  <Container fluid className="ml-lg-5 pl-md-5">
+  <Container className="ml-lg-5 pl-md-5">
     <Row>
       <Col className="centro">
         <img

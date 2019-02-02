@@ -1,8 +1,11 @@
 import React from 'react';
 import { TopLogo } from '../layouts';
-import { Switch, Route, NavLink } from 'react-router-dom';
+import { Switch, Route, NavLink, Redirect } from 'react-router-dom';
 import { slide as Menu } from 'react-burger-menu';
 import Productos from './productos/Productos';
+import Insumos from './insumos/Insumos';
+import Inicio from './inicio/Inicio';
+import Produccion from './produccion/Produccion';
 import './Admin.css';
 
 class Admin extends React.PureComponent {
@@ -10,7 +13,7 @@ class Admin extends React.PureComponent {
     {
       name: 'Inicio',
       path: '',
-      component: props => <h1>Inicio</h1>,
+      component: Inicio,
       exact: true
     },
     {
@@ -20,9 +23,21 @@ class Admin extends React.PureComponent {
       exact: true
     },
     {
-      name: 'Entradas',
-      path: '/entradas',
-      component: props => <h1>Entradas</h1>,
+      name: 'Insumos',
+      path: '/insumos',
+      component: Insumos,
+      exact: true
+    },
+    {
+      name: 'Producción',
+      path: '/produccion',
+      component: Produccion,
+      exact: true
+    },
+    {
+      name: 'Operación',
+      path: '/operacion',
+      component: props => <Redirect to="/" />,
       exact: true
     }
   ];
@@ -31,8 +46,11 @@ class Admin extends React.PureComponent {
     return (
       <React.Fragment>
         <Menu>
-          {this.rutas_admin.map(ruta => (
-            <div className="linkBlanco tmuygrande wbold parmuychico pabchico">
+          {this.rutas_admin.map((ruta, i) => (
+            <div
+              key={`ruta-${i}`}
+              className="linkBlanco tmuygrande wbold parmuychico pabchico"
+            >
               <NavLink
                 key={ruta.name}
                 to={`${this.props.match.url}${ruta.path}`}

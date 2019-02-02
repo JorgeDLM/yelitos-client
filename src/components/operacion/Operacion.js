@@ -7,15 +7,27 @@ import axios from 'axios';
 import swal from '@sweetalert/with-react';
 import { axiosConfig } from '../../constants';
 import { TopLogo } from '../layouts';
-// TODO: borrar mock data
-import productos from './productos.mock.json';
 
 class Operacion extends React.PureComponent {
   state = {
+    productos: [],
     presentacion: null,
     cadena_cantidad: '',
     vista: 1
   };
+
+  componentDidMount() {
+    let filter = {
+      where: {
+        eliminado: false
+      }
+    };
+    filter = JSON.stringify(filter);
+    filter = window.encodeURI(filter);
+    axios(axiosConfig(`/productos?filter=${filter}`))
+      .then(response => this.setState({ productos: response.data }))
+      .catch(error => console.log);
+  }
 
   handleCambioCantidad(valor) {
     this.setState(prevState => ({
@@ -28,13 +40,13 @@ class Operacion extends React.PureComponent {
   }
 
   submit(valor) {
-    const { id, presentacion } = valor;
+    const { id, kgs } = valor;
     let cantidad = parseInt(this.state.cadena_cantidad);
     if (!isNaN(cantidad)) {
       swal({
         title: 'Verifique su informacion',
-        text: `Registar ${cantidad} bolsas en presentación de ${presentacion} de bolsa ${
-          valor.nombre
+        text: `Registar ${cantidad} bolsas en presentación de ${kgs} Kgs de bolsa ${
+          valor.logotipo
         }`,
         icon: 'info',
         buttons: {
@@ -54,8 +66,7 @@ class Operacion extends React.PureComponent {
           axios(
             axiosConfig('/entradas', 'post', {
               productoId: id,
-              cantidad,
-              presentacion
+              cantidad
             })
           )
             .then(response => {
@@ -105,7 +116,7 @@ class Operacion extends React.PureComponent {
       case 2:
         return (
           <Presentaciones
-            presentaciones={productos}
+            presentaciones={this.state.productos}
             presentacionModificar={this.submit.bind(this)}
             presentacionVolver={() => {
               this.setState({ vista: 1 });

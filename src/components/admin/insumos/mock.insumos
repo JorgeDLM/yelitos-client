@@ -1,0 +1,12 @@
+[
+  {
+    'repeat(5, 10)': {
+      _id: '{{objectId()}}',
+      nombre: '{{company().toUpperCase()}}',    
+      cantidad: '{{integer(1, 5000)}}',
+      precioTotal: '{{integer(300, 17500)}}',
+      precioUnidad: '{{precioTotal/cantidad}}',
+
+    }
+  }
+]
