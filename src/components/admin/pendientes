@@ -1,28 +1,15 @@
 pendientes....
 
-limitar valor total de insumos float a 2 decimales, tambien en productos (cuando este)
-
-
-cada que se escoja una fecha o un rango, que diga la produccion total por producto (solo una vez, total del rango seleccionado)
-
-boton de editar producto
-
-que cuando añadas un nuevo insumo, no se ingrese la cantidad (que solo se ingrese nombre del producto el precio por unidad y el inventario minimo, ya si quiere agregar inventario sobre el insumo que lo añada manualmente. que se recargue este campo cada vez que se añada un producto nuevo)
-
-resultados mensuales (poner siempre visibles los resultados mensuales en INICIO)
-
 grafica con rango, poner velas tipo mensuales o semanales despues de un mes
 
 calendario en español, grafica con fecha en español
 
-
 respalod (base de datos)
 
+limpiar forma<s de insumos despues de usarlas en admin/insumos al ingresar inventario
 
-boton retirar insumo
-limpiar forma<s
+soft delete 
 
-poner practibolsa
 
 FASE 2:
 

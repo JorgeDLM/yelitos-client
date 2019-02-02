@@ -47,14 +47,6 @@ class Inicio extends React.PureComponent {
   }
 
   componentDidMount() {
-    axios(axiosConfig('/insumos/minimos'))
-      .then(response => {
-        this.setState({ insumos: response.data.minimos });
-      })
-      .catch(console.log);
-  }
-
-  componentDidMount() {
     this.loadProductos();
     var urlToChangeStream = `${SERVER_URL}/api/entradas/change-stream?_format=event-stream`;
     var src = new EventSource(urlToChangeStream);
@@ -98,13 +90,18 @@ class Inicio extends React.PureComponent {
       .then(response => {
         axios(axiosConfig('/productos'))
           .then(responsei => {
-            this.setState({
-              entradas: response.data,
-              productos: responsei.data.reduce((salida, entrada) => {
-                salida[entrada.id] = entrada;
-                return salida;
-              }, {})
-            });
+            axios(axiosConfig('/insumos/minimos'))
+              .then(responsej => {
+                this.setState({
+                  insumos: responsej.data.minimos,
+                  entradas: response.data,
+                  productos: responsei.data.reduce((salida, entrada) => {
+                    salida[entrada.id] = entrada;
+                    return salida;
+                  }, {})
+                });
+              })
+              .catch(console.log);
           })
           .catch(error => console.log);
       })
@@ -170,7 +167,7 @@ class Inicio extends React.PureComponent {
 
     entradasMes = toPairs(entradasMes);
 
-    let entradasTotales = entradasMes.map(mes => [
+    let entradasTotales = entradasMes.reverse().map(mes => [
       mes[0],
       mes[1].reduce((salida, entrada) => {
         salida += this.getKgs(entrada.cantidad, entrada.productoId);
@@ -199,7 +196,7 @@ class Inicio extends React.PureComponent {
 
   render() {
     return (
-      <Container className="parchico">
+      <Container className="parchico pabgrande">
         <Row>
           <Col>
             {this.state.insumos.map((insumo, i) => {
@@ -253,15 +250,15 @@ class Inicio extends React.PureComponent {
             </tbody>
           </Table>
         </Card>
-
+        {/*
         <div className="parmediano">
           <ModalAgregarMaquina />
         </div>
         <div className="centro">Mapa</div>
         <Row className="pargrande centro ">
-          {/*{this.state.maquinas.map((maquina, i) => (<ComponenteMaquinas key={i} maquina={maquina} />))}*/}
+          {this.state.maquinas.map((maquina, i) => (<ComponenteMaquinas key={i} maquina={maquina} />))}
           <canvas id="mapa" width={500} height={500} />
-        </Row>
+        </Row>*/}
       </Container>
     );
   }

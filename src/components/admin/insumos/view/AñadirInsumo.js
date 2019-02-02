@@ -77,17 +77,7 @@ class AñadirInsumos extends React.PureComponent {
               <Input
                 type="number"
                 onChange={this.handleChange}
-                placeholder="Cantidad"
-                min={0}
-                step={1}
-                name="cantidad"
-              />
-            </InputGroup>
-            <InputGroup>
-              <Input
-                type="number"
-                onChange={this.handleChange}
-                placeholder="Valor Total"
+                placeholder="Valor por unidad"
                 min={0}
                 step={1}
                 name="valor"

@@ -53,16 +53,16 @@ class InsumoEdit extends PureComponent {
           </td>
           <td>
             <Input
-              value={this.state.valor / this.state.cantidad || 0}
-              readOnly
+              onChange={this.handleChange.bind(this)}
+              value={this.state.valor}
+              name="valor"
               type="number"
             />
           </td>
           <td>
             <Input
-              onChange={this.handleChange.bind(this)}
-              value={this.state.valor}
-              name="valor"
+              value={this.state.valor * this.state.cantidad || 0}
+              readOnly
               type="number"
             />
           </td>

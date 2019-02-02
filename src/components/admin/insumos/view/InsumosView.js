@@ -13,7 +13,7 @@ function numberWithCommas(x) {
 }
 
 const Renglon = (insumo, indice, props) => {
-  let precio = insumo.valor / insumo.cantidad;
+  let precio = insumo.cantidad >= 0 ? insumo.valor * insumo.cantidad : 0;
   if (insumo.edit) {
     return (
       <InsumoEdit
@@ -41,8 +41,8 @@ const Renglon = (insumo, indice, props) => {
           >
             {insumo.cantidad}
           </td>
-          <td>${numberWithCommas(precio.toFixed(2))}</td>
           <td>${numberWithCommas(insumo.valor.toFixed(2))}</td>
+          <td>${numberWithCommas(precio.toFixed(2))}</td>
           <td>
             <FaPen
               className="h4 amarillo iconoBoton"
@@ -64,18 +64,22 @@ const Renglon = (insumo, indice, props) => {
 const Renglon2 = ({ insumos }) => {
   let valores = insumos.reduce(
     (salida, entrada) => {
-      salida.cantidad += entrada.cantidad;
-      salida.total += entrada.valor;
-      return salida;
+      if (entrada.cantidad > 0 && entrada.valor > 0) {
+        salida.total += entrada.cantidad * entrada.valor;
+        return salida;
+      } else {
+        return salida;
+      }
     },
-    { cantidad: 0, total: 0 }
+    { total: 0 }
   );
   return (
     <tbody>
       <tr className="wbold">
         <td />
-        <td className="fondoAzul blanco">CANTIDAD TOTAL:</td>
-        <td className="fondoAzul blanco">{valores.cantidad}</td>
+        <td />
+        <td />
+
         <td className="fondoAzulClaro negro">VALOR TOTAL:</td>
         <td className="fondoAzulClaro negro">
           ${numberWithCommas(valores.total)}

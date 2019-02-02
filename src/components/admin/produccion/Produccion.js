@@ -373,7 +373,7 @@ class Produccion extends PureComponent {
         return {
           day: day,
           times: group,
-          open: !this.state.collapsed.includes(day)
+          open: this.state.collapsed.includes(day)
         };
       }.bind(this)
     );
