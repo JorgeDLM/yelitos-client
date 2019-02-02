@@ -4,7 +4,6 @@ import { Container, Row, Col } from 'reactstrap';
 import axios from 'axios';
 import { axiosConfig } from '../../../constants';
 // TODO delete mocks
-import insumos from './insumos.mock.json';
 import swal from '@sweetalert/with-react';
 
 class Insumos extends React.PureComponent {
