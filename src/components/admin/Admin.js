@@ -6,6 +6,7 @@ import Productos from './productos/Productos';
 import Insumos from './insumos/Insumos';
 import Inicio from './inicio/Inicio';
 import Produccion from './produccion/Produccion';
+import Ventas from './ventas/Ventas';
 import './Admin.css';
 
 class Admin extends React.PureComponent {
@@ -70,6 +71,7 @@ class Admin extends React.PureComponent {
                 exact={ruta.exact}
               />
             ))}
+            <Route path="/admin/ventas" component={Ventas} />
           </Switch>
         </TopLogo>
       </React.Fragment>

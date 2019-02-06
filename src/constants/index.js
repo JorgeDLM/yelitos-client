@@ -1,4 +1,4 @@
-export const SERVER_URL = 'https://yelitos.herokuapp.com/';
+export const SERVER_URL = 'http://192.168.1.79:3000';
 
 export const axiosConfig = (path, method, data) => ({
   method: method || 'get',

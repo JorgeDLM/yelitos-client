@@ -21,8 +21,8 @@
 }
 
 .botonArchivo {
-	border: 2px solid #3a9cd6;
-	color: #3a9cd6;
+	border: 2px solid #00aff0;
+	color: #00aff0;
 	background-color: white;
 	padding: 4px 15px;
 	border-radius: 8px;
@@ -94,7 +94,7 @@
 }
 
 .botonAzul.claseCalendario.btn.btn-secondary.active {
-	background-color: #215b7c;
+	background-color: red;
 }
 .botonAmarillo.claseCalendario.btn.btn-secondary.active {
 	background-color: #bf8c0d;
@@ -222,9 +222,10 @@ COLORES
 
 NEGRO #231F20
 
-AZUL #3A9CD6
-AZUL HOVER #215B7C
-AZUL CLARO #b2e1e6
+AZUL #00AFF0
+AZUL HOVER #33c9ff
+AZUL CLARO #80ddff
+AZUL HOVER #4dcfff
 
 ROJO #EA4435
 ROJO HOVER #BF382B
@@ -238,23 +239,23 @@ AMARILLO HOVER #BF8C0D
 /*----------------------------------------------------------------*/
 /* BOTONES Y HOVER */
 .botonAzul {
-	background: #3a9cd6;
+	background: #00aff0;
 	color: white;
 	border: none;
 	font-weight: bold;
 }
 .botonAzul:hover {
-	background: #215b7c;
+	background: #33c9ff;
 	color: white;
 }
 .botonAzulClaro {
-	background: #b2e1e6;
+	background: #80ddff;
 	color: white;
 	border: none;
 	font-weight: bold;
 }
 .botonAzulClaro:hover {
-	background: #80ced6;
+	background: #4dcfff;
 	color: white;
 }
 .botonRojo {
@@ -304,13 +305,13 @@ AMARILLO HOVER #BF8C0D
 /*azul*/
 .botonBlanco1 {
 	background: white;
-	color: #3a9cd6;
+	color: #00aff0;
 	border: none;
 	font-weight: bold;
 }
 .botonBlanco1:hover {
 	background: #e6e6e6;
-	color: #3a9cd6;
+	color: #00aff0;
 }
 /*amarillo*/
 .botonBlanco2 {
@@ -392,7 +393,7 @@ AMARILLO HOVER #BF8C0D
 	background: #fdba12;
 }
 .fondoAzul {
-	background: #3a9cd6;
+	background: #00aff0;
 }
 .fondoRojo {
 	background: #ea4435;
@@ -414,7 +415,7 @@ AMARILLO HOVER #BF8C0D
 	background: #fef0cd;
 }
 .fondoAzulClaro {
-	background: #d5eaf6;
+	background: #b3ebff;
 }
 .fondoRojoClaro {
 	background: #fad4d1;
@@ -458,7 +459,7 @@ AMARILLO HOVER #BF8C0D
 	color: #fdba12;
 }
 .azul {
-	color: #3a9cd6;
+	color: #00aff0;
 }
 .rojo {
 	color: #ea4435;
@@ -479,7 +480,7 @@ AMARILLO HOVER #BF8C0D
 	color: #fef0cd;
 }
 .azulClaro {
-	color: #d5eaf6;
+	color: #b3ebff;
 }
 .rojoClaro {
 	color: #fad4d1;
@@ -713,7 +714,7 @@ AMARILLO HOVER #BF8C0D
 }
 
 .linkAzul a {
-	color: #3a9cd6;
+	color: #00aff0;
 	text-decoration: none;
 }
 .linkAzul a:hover {
@@ -746,7 +747,7 @@ COLORES
 
 NEGRO #231F20
 
-AZUL #3A9CD6
+AZUL #00AFF0
 AZUL HOVER #215B7C
 
 ROJO #EA4435
