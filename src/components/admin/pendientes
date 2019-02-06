@@ -1,5 +1,7 @@
 pendientes....
 
+que funcione offline
+
 grafica con rango, poner velas tipo mensuales o semanales despues de un mes
 
 calendario en español, grafica con fecha en español
@@ -12,6 +14,15 @@ soft delete
 
 
 FASE 2:
+
+colores en el calendario no jalan, como cambiarlo por la paleta de colores de yelitos
+
+dividir todo en operacion y en ventas.... en operacion meter (productos, insumos, produccion y (operacion renombrar quizas))
+	admin/operacion/productos
+	admin/ventas/
+	tambien puede ser una pestaña de ventas con todo lo que corresponde
+
+
 
 inventarios de produccion (saber cuantas bolsas de cuantos kg tiene que haber en almacen)
 

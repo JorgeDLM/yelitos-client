@@ -16,6 +16,18 @@ class Operacion extends React.PureComponent {
     vista: 1
   };
 
+  timer = null;
+
+  checkTimer() {
+    if (this.timer === null && !navigator.onLine) {
+      this.timer = setInterval(this.checkTimer, 900);
+    } else if (this.timer !== null && navigator.onLine) {
+      clearTimeout(this.timer);
+      this.timer = null;
+      this.sync();
+    }
+  }
+
   componentDidMount() {
     let filter = {
       where: {
@@ -24,9 +36,18 @@ class Operacion extends React.PureComponent {
     };
     filter = JSON.stringify(filter);
     filter = window.encodeURI(filter);
-    axios(axiosConfig(`/productos?filter=${filter}`))
-      .then(response => this.setState({ productos: response.data }))
-      .catch(error => console.log);
+    if (navigator.onLine) {
+      axios(axiosConfig(`/productos?filter=${filter}`))
+        .then(response => {
+          this.setState({ productos: response.data });
+          localStorage.setItem('productos', JSON.stringify(response.data));
+        })
+        .catch(error => console.log);
+    } else {
+      this.checkTimer();
+      let prodBckp = JSON.parse(localStorage.getItem('productos'));
+      this.setState({ productos: prodBckp });
+    }
   }
 
   handleCambioCantidad(valor) {
@@ -37,6 +58,23 @@ class Operacion extends React.PureComponent {
 
   handleCambioPresentacion(valor) {
     this.setState({ presentacion: valor, vista: 3 });
+  }
+
+  backupLocal(entrada) {
+    let entradas = localStorage.entradas || '[]';
+    entrada.hora = new Date();
+    entradas = [...JSON.parse(entradas), entrada];
+    localStorage.setItem('entradas', JSON.stringify(entradas));
+  }
+
+  submitSuccess() {
+    swal('Exito', 'La produccion ha sido regitrada', 'success').then(() => {
+      this.setState({
+        presentacion: null,
+        cadena_cantidad: '',
+        vista: 1
+      });
+    });
   }
 
   submit(valor) {
@@ -63,30 +101,62 @@ class Operacion extends React.PureComponent {
       }).then(confirmacion => {
         console.log(confirmacion);
         if (confirmacion) {
-          axios(
-            axiosConfig('/entradas', 'post', {
+          if (navigator.onLine) {
+            this.sync();
+            axios(
+              axiosConfig('/entradas', 'post', {
+                productoId: id,
+                cantidad
+              })
+            )
+              .then(response => {
+                if (response.status === 200) {
+                  this.submitSuccess();
+                }
+              })
+              .catch(error => {
+                this.backupLocal({
+                  productoId: id,
+                  cantidad
+                });
+                console.log(error);
+              });
+          } else {
+            this.checkTimer();
+            this.backupLocal({
               productoId: id,
               cantidad
-            })
-          )
-            .then(response => {
-              if (response.status === 200) {
-                swal(
-                  'Exito',
-                  'La produccion ha sido regitrada',
-                  'success'
-                ).then(() => {
-                  this.setState({
-                    presentacion: null,
-                    cadena_cantidad: '',
-                    vista: 1
-                  });
-                });
-              }
-            })
-            .catch(console.log);
+            });
+            this.submitSuccess();
+          }
         }
       });
+    }
+  }
+
+  sync() {
+    let entradas = localStorage.entradas;
+    if (entradas) {
+      entradas = JSON.parse(entradas);
+      let results = [];
+      entradas.forEach(async entrada => {
+        try {
+          const response = await axios(
+            axiosConfig('/entradas', 'post', entrada)
+          );
+          console.log(response);
+          results.push(true);
+        } catch (error) {
+          console.error(error);
+          results.push(false);
+        }
+      });
+      if (results.every(result => result)) {
+        localStorage.removeItem('entradas');
+      } else {
+        entradas = entradas.filter((entrada, i) => !results[i]);
+        localStorage.setItem('entradas', JSON.stringify(entradas));
+      }
     }
   }
 
